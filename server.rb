@@ -1,12 +1,11 @@
 require 'sinatra'
 require './acronym'
+require './word'
 
 set :static_cache_control, [:public, max_age: 60 * 60 * 24]
 
 suggester = AcronymSuggester.new(
-  File.readlines('adjectives.txt'),
-  File.readlines('nouns.txt'),
-  File.readlines('agent_nouns.txt')
+  Word.load_from_file('words.txt')
 )
 
 get '/' do
