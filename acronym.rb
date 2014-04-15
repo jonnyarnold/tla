@@ -6,7 +6,11 @@ class AcronymSuggester
   # structure for the acronym would be a word of type a,
   # then one of type b and one of type c.
   AllowedStructures = [
-    [:adjective, :noun, :agent_noun]
+    [:adjective, :noun],
+    [:adjective, :agent_noun],
+    [:adjective, :noun, :agent_noun],
+    [:adjective, :adjective, :noun],
+    [:adjective, :adjective, :adjective, :noun]
   ]
 
   # Initialize the suggester
