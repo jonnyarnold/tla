@@ -6,6 +6,7 @@ class Word < String
 
   attr_reader :type
 
+  # Creates a word. Type can be specified on creation.
   def initialize(word, type=nil)
     super word
 
