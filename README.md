@@ -10,7 +10,7 @@ Current Usage
 http://tla.herokuapp.com/<your_acronym_here>
 ```
 
-Three letters only please.
+Supports 2, 3 and 4 letters. Sense guaranteed.
 
 Developers
 ----------
