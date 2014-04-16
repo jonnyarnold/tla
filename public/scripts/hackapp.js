@@ -3,12 +3,16 @@
  * e.g. Update button invokes a refresh of values and displays the,
  */
 
+
+/******************************
+ * Data feetching and display *
+ ******************************/
+
 function displaySuggestion(suggestion) {
     var displayText = suggestion.acronym + ": " + suggestion.suggestion;
     $("#AcronymResult").text(displayText);
     $("#AcronymResult").show();
 }
-
 
 function queryServer(restUrl) {
     $.ajax({
@@ -30,6 +34,23 @@ function getSuggestions() {
 }
 
 
+/************************
+ * Responsive behaviour *
+ ************************/
+
+function setResponsivePlaceholderText() {
+    if ($(window).width() < 800){
+        $('#AcronymInput').attr('placeholder','Enter TLA...');
+     } else {
+        $('#AcronymInput').attr('placeholder','Enter your acronym!');
+    }
+}
+
+
+/*************************************
+ * Attaching listeners and init page *
+ *************************************/
+
 jQuery(document).ready(function(event) {
     $("#AcronymSubmit").click(function() {
         getSuggestions();
@@ -40,5 +61,11 @@ jQuery(document).ready(function(event) {
 		 getSuggestions();
 		}
 	});
+
+    setResponsivePlaceholderText();
+
+    $(window).resize(function() {
+        setResponsivePlaceholderText();
+    });
 });
 
