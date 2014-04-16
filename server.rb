@@ -10,6 +10,6 @@ get '/' do
   haml :index
 end
 
-get '/:acronym' do
-  suggester.suggest_for(params[:acronym].upcase)
+get %r{/([A-Za-z]{2,4})$} do |acronym|
+  suggester.suggest_for(acronym.upcase)
 end

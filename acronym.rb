@@ -24,6 +24,7 @@ class AcronymSuggester
   # The first letters of all words should be in uppercase.
   def suggest_for(acronym)
     structure = valid_structures_for(acronym).sample
+    raise ArgumentError.new("Could not get structure for #{acronym}") if structure.nil?
 
     suggestion = (0...(acronym.length)).map do |index|
       letter = acronym[index]
