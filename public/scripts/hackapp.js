@@ -28,7 +28,7 @@ function getSuggestion(restUrl) {
 jQuery(document).ready(function(event) {
     $("#AcronymSubmit").click(function() {
         var acronym = $("#AcronymInput").val();
-        var restUrl = "http://localhost:4567/" + acronym;
+        var restUrl = "/" + acronym;
         getSuggestion(restUrl);
     });
 });
