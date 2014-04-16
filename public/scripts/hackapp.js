@@ -27,9 +27,9 @@ function queryServer(restUrl) {
             }
         });
     }
-	
+    
 function getSuggestions() {
-		var acronym = $("#AcronymInput").val();
+        var acronym = $("#AcronymInput").val();
         queryServer("/" + acronym);
 }
 
@@ -55,12 +55,12 @@ jQuery(document).ready(function(event) {
     $("#AcronymSubmit").click(function() {
         getSuggestions();
     });
-	
-	$(document).on("keypress", "#AcronymInput", function(e) {
-		if (e.which == 13) {
-		 getSuggestions();
-		}
-	});
+    
+    $(document).on("keypress", "#AcronymInput", function(e) {
+        if (e.which == 13) {
+         getSuggestions();
+        }
+    });
 
     setResponsivePlaceholderText();
 
