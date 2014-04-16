@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <title>TLA! Three Letter Acronyms, just for you.</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link href="styles/bootstrap.min.css" type="text/css" rel="stylesheet">
+        <link href="styles/bootstrap-theme.min.css" type="text/css" rel="stylesheet">
+        <link href="styles/bootstrap.min.css" type="text/css" rel="stylesheet">
+        <link href="styles/tla.css" type="text/css" rel="stylesheet">
+        <script src="scripts/jquery-2.1.0.min.js" type='text/javascript'></script>
+        <script src="scripts/hackapp.js" type='text/javascript'></script>
+    </head>
+    
+    <body >
+      <div class="container-full">
+        <div class="interaction col-lg-6">
+            <div class="well interaction-box">
+              <form>
+                <fieldset>
+
+                  <!-- Form Information -->
+                  <h1>TLA</h1>
+                  <span class="interaction-subtitle">
+                    <p>Generate suggestions for your favourite Three Letter Acronyms</p>
+                  </span>
+
+                  <br />
+
+                  <!-- User Input-->
+                  <div class="form-group interaction-centre-group">
+                    <input id="AcronymInput" name="textinput" placeholder="Enter your acryonym!" class="form-control input-lg tla-input" type="text">
+                    <div id="AcronymSubmit" class="btn btn-lg btn-primary tla-submit">Go!</div>
+                  </div>
+
+                  <!-- Result Output -->
+                  <div id="AcronymResult" class="tla-result-group">
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+
+      </div>
+        
+    </body>
+</html>
