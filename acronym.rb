@@ -31,7 +31,7 @@ class AcronymSuggester
       suggest_word(letter, type)
     end
       
-    suggestion.join(' ').delete!("\n")
+    suggestion.join(' ')
   end
 
   private
