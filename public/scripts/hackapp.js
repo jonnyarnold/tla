@@ -10,7 +10,7 @@ function displaySuggestion(suggestion) {
 }
 
 
-function getSuggestion(restUrl) {
+function queryServer(restUrl) {
     $.ajax({
             url: restUrl,
             type: 'GET',
@@ -23,13 +23,22 @@ function getSuggestion(restUrl) {
             }
         });
     }
+	
+function getSuggestions() {
+		var acronym = $("#AcronymInput").val();
+        queryServer("/" + acronym);
+}
 
 
 jQuery(document).ready(function(event) {
     $("#AcronymSubmit").click(function() {
-        var acronym = $("#AcronymInput").val();
-        var restUrl = "/" + acronym;
-        getSuggestion(restUrl);
+        getSuggestions();
     });
+	
+	$(document).on("keypress", "#AcronymInput", function(e) {
+		if (e.which == 13) {
+		 getSuggestions();
+		}
+	});
 });
 
