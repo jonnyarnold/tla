@@ -126,6 +126,10 @@ p {
     padding: 5%;
 }
 
+.social-media-group {
+    float: right;
+}
+
 @media(max-width:460px){
     .interaction .interaction-box{
         margin:0 10px;
