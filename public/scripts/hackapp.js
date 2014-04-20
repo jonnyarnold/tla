@@ -12,6 +12,20 @@ function displaySuggestion(suggestion) {
     var displayText = suggestion.acronym + ": " + suggestion.suggestion;
     $("#AcronymResult").text(displayText);
     $("#AcronymResult").show();
+    $('#tweet').attr('href', generateTweetUrl(displayText))
+}
+
+// Creates a Twitter Share URL for use on a Tweet button
+// as documented @ https://dev.twitter.com/docs/tweet-button
+function generateTweetUrl(tla) {
+    url = window.location.origin
+    tweetText = tla; // Twitter adds URL automatically
+
+    return "https://twitter.com/intent/tweet" +
+        "?hashtags=" + "TLA" +
+        "&url=" + url +
+        "&text=" + tweetText + 
+        "#TLA";
 }
 
 function queryServer(restUrl) {
