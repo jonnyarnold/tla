@@ -18,7 +18,7 @@ function displaySuggestion(suggestion) {
 // Creates a Twitter Share URL for use on a Tweet button
 // as documented @ https://dev.twitter.com/docs/tweet-button
 function generateTweetUrl(tla) {
-    url = "http://tla.herokuapp.com/";
+    url = window.location.origin
     tweetText = tla; // Twitter adds URL automatically
 
     return "https://twitter.com/intent/tweet" +
