@@ -105,6 +105,12 @@ p {
   margin-right: 4%;
 }
 
+.tla-version {
+  font-size: 0.8em;
+  color: #ccc;
+  text-align: right;
+}
+
 .interaction form .btn{
   background:none;
   -webkit-transition: background 0.2s ease-in-out;
@@ -136,4 +142,3 @@ p {
     .interaction .interaction-box{
         background: rgba(0, 0, 0, 0.4);
 }
-

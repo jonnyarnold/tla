@@ -6,6 +6,7 @@ require './word'
 set :static_cache_control, [:public, max_age: 60 * 60 * 24]
 
 suggester = AcronymSuggester.new(Word.load_from_file('words.txt'))
+Version = `git rev-parse --short HEAD`.chomp
 
 get '/' do
   content_type 'html'
