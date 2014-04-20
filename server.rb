@@ -12,8 +12,7 @@ get '/' do
   erb :index
 end
 
-get '/:acronym' do
-  @acronym = params[:acronym]
-  @suggestion = suggester.suggest_for(@acronym.upcase)
-  {:acronym => @acronym, :suggestion => @suggestion}.to_json
+get %r{/([A-Za-z]{2,4})$} do |acronym|
+  suggestion = suggester.suggest_for(acronym.upcase)
+  {:acronym => acronym, :suggestion => suggestion}.to_json
 end
