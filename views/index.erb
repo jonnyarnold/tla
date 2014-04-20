@@ -29,7 +29,9 @@
 
                   <!-- User Input-->
                   <div class="form-group interaction-centre-group">
-                    <input id="AcronymInput" placeholder="Enter your acryonym!" class="form-control input-lg tla-input" type="text">
+                    <input id="AcronymInput" placeholder="Enter your acronym!" class="form-control input-lg tla-input" type="text"
+                      onblur="setResponsivePlaceholderText();"
+                      onfocus="placeholder = '';" >
                     <div id="AcronymSubmit" class="btn btn-lg btn-primary tla-submit">Go!</div>
                   </div>
 
