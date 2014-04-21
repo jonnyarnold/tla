@@ -19,10 +19,17 @@ function TlaViewModel() {
         }
      });
 
+    // Capitalises the acronym
+    self.capitalAcronym = ko.computed(function() {
+        var lowerAcronym = self.acronym();
+        if (lowerAcronym !== undefined) return lowerAcronym.toUpperCase();
+        else return "";
+    });
+
     // Result bound variable will update if suggestion updates.
     // This is then propogated to the DOM via binding.
     self.result = ko.computed(function() { 
-        return self.acronym.peek() + ": " + self.suggestion(); 
+        return self.capitalAcronym.peek() + ": " + self.suggestion();
     });
 
     // Sets the twitter target url. If no suggestion exists,
@@ -31,7 +38,7 @@ function TlaViewModel() {
         var url = window.location.origin;
 
         if (self.suggestion()) {
-            var tweetText = self.result(); 
+            var tweetText = self.result();
         } else {
             var tweetText = "TLA! Three Letter Acronyms, just for you.";
         }
