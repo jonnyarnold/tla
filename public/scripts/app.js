@@ -45,7 +45,7 @@ function TlaViewModel() {
         
         return "https://twitter.com/intent/tweet" +
             "?hashtags=" + "TLA" +
-            "&url=" + url +
+            "&url=" + encodeURIComponent(url) +
             "&text=" + tweetText;
     });
 
