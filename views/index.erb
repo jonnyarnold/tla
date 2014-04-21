@@ -39,6 +39,10 @@
                      type="text">
                   </div>
 
+                  <div data-bind="visible: suggestion()" class="tla-hint">
+                    Press Enter for another suggestion
+                  </div>
+
                   <!-- Result Output -->
                   <div data-bind="text: result, visible: acronym() && suggestion()" class="tla-result-group">
                   </div>
