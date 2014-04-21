@@ -31,7 +31,7 @@
 
                   <!-- User Input-->
                   <div class="form-group">
-                    <input data-bind="value: acronym, valueUpdate: 'afterkeydown'"
+                    <input data-bind="value: acronym, valueUpdate: 'afterkeydown', event: { keypress: onKeypress }"
                      placeholder="Enter TLA..."
                      onfocus="placeholder = '';" 
                      onblur="placeholder = 'Enter TLA...';" 
