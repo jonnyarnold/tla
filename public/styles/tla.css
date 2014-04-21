@@ -114,6 +114,12 @@ html,body {
     padding: 5%;
 }
 
+.tla-hint {
+    text-align: center;
+    color: #ccc;
+    font-style: italic;
+}
+
 .social-media-group {
     float: right;
 }
