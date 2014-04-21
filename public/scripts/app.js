@@ -41,6 +41,12 @@ function TlaViewModel() {
             "&url=" + url +
             "&text=" + tweetText;
     });
+
+    self.onKeypress = function(data, event) {
+        // Force re-evaluation on 'enter'
+        if (event.keyCode == 13) self.acronym.valueHasMutated();
+        return true;
+    }
 }
 
 jQuery(document).ready(function() {
