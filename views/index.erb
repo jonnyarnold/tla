@@ -8,6 +8,7 @@
         <link href="styles/bootstrap-theme.min.css" type="text/css" rel="stylesheet">
         <link href="styles/bootstrap.min.css" type="text/css" rel="stylesheet">
         <link href="styles/tla.css" type="text/css" rel="stylesheet">
+        <link href="styles/twitter-btn.css" type="text/css" rel="stylesheet">
         <script src="scripts/jquery-2.1.0.min.js" type='text/javascript'></script>
         <script src="scripts/knockout-3.1.0.js" type='text/javascript'></script>
         <script src="scripts/app.js" type='text/javascript'></script>
@@ -32,13 +33,23 @@
                   <div class="form-group">
                     <input data-bind="value: acronym, valueUpdate: 'afterkeydown'"
                      placeholder="Enter TLA..."
-                     onfocus="placeholder = '';"  
+                     onfocus="placeholder = '';" 
+                     onblur="placeholder = 'Enter TLA...';" 
                      class="form-control input-lg" 
                      type="text">
                   </div>
 
                   <!-- Result Output -->
                   <div data-bind="text: result, visible: acronym() && suggestion()" class="tla-result-group">
+                  </div>
+
+                  <div id="SocialMedia" class="social-media-group">
+                    <div class="custom-tweet-button">
+                      <a id="tweet" data-bind="attr: { 'href': twitterUrl }" target="_blank" alt ="Tweet this acronym!">
+                        <i class="btn-icon"></i>
+                        <span class="btn-text">Tweet</span>
+                      </a>
+                    </div>
                   </div>
                 </fieldset>
               </form>
