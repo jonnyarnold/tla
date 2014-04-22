@@ -58,4 +58,14 @@ function TlaViewModel() {
 
 jQuery(document).ready(function() {
     ko.applyBindings(TlaViewModel());
+
+    $("#AcronymInput").on('input', function(evt) {
+        var input = $(this);
+        var start = input[0].selectionStart;
+        $(this).val(function (_, val) {
+            return val.toUpperCase();
+        });
+        input[0].selectionStart = input[0].selectionEnd = start;
+    });
+
 });
