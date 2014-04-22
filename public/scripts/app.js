@@ -63,6 +63,7 @@ jQuery(document).ready(function() {
         var input = $(this);
         var start = input[0].selectionStart;
         $(this).val(function (_, val) {
+            val = val.replace(/[^A-Za-z]/g, '');
             return val.toUpperCase();
         });
         input[0].selectionStart = input[0].selectionEnd = start;
