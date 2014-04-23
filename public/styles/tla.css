@@ -121,7 +121,12 @@ html,body {
 }
 
 .social-media-group {
-    float: right;
+    text-align: center;
+    padding-top: 5%;
+}
+
+.social-media-item {
+    display:inline-block;
 }
 
 @media(max-width:460px){
@@ -134,4 +139,3 @@ html,body {
     .interaction .interaction-box{
         background: rgba(0, 0, 0, 0.4);
 }
-
