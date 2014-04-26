@@ -92,3 +92,9 @@ function unhover_g(element) {
     element.setAttribute('src', 'styles/images/googleplus.png');
 }
 
+function hover_linkedin(element) {
+    element.setAttribute('src', 'styles/images/linkedin_hover.png');
+}
+function unhover_linkedin(element) {
+    element.setAttribute('src', 'styles/images/linkedin.png');
+}
