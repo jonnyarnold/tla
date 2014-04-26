@@ -71,30 +71,50 @@ jQuery(document).ready(function() {
 
 });
 
+// switches the corresponding social media icon with its onHover countepart
 function hover(element) {
-    element.setAttribute('src', 'styles/images/twitter_hover.png');
+
+    n=element.id;
+
+    switch(n){
+        case "twitter_icon":
+            element.setAttribute('src', 'styles/images/twitter_hover.png')
+            break;
+        case "facebook_icon":
+            element.setAttribute('src', 'styles/images/facebook_hover.png');
+            break;
+        case "googleplus_icon":
+            element.setAttribute('src', 'styles/images/googleplus_hover.png');
+            break;
+        case "linkedin_icon":
+            element.setAttribute('src', 'styles/images/linkedin_hover.png');
+            break;
+        default:
+            // do nothing
+            break;
+    }
 }
+
+// switches the corresponding social media icon back to the default image
 function unhover(element) {
-    element.setAttribute('src', 'styles/images/twitter.png');
-}
 
-function hover_fb(element) {
-    element.setAttribute('src', 'styles/images/facebook_hover.png');
-}
-function unhover_fb(element) {
-    element.setAttribute('src', 'styles/images/facebook.png');
-}
+    n=element.id;
 
-function hover_g(element) {
-    element.setAttribute('src', 'styles/images/googleplus_hover.png');
-}
-function unhover_g(element) {
-    element.setAttribute('src', 'styles/images/googleplus.png');
-}
-
-function hover_linkedin(element) {
-    element.setAttribute('src', 'styles/images/linkedin_hover.png');
-}
-function unhover_linkedin(element) {
-    element.setAttribute('src', 'styles/images/linkedin.png');
+    switch(n){
+        case "twitter_icon":
+            element.setAttribute('src', 'styles/images/twitter.png')
+            break;
+        case "facebook_icon":
+            element.setAttribute('src', 'styles/images/facebook.png');
+            break;
+        case "googleplus_icon":
+            element.setAttribute('src', 'styles/images/googleplus.png');
+            break;
+        case "linkedin_icon":
+            element.setAttribute('src', 'styles/images/linkedin.png');
+            break;
+        default:
+            // do nothing
+            break;
+    }
 }
