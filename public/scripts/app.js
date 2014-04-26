@@ -77,3 +77,18 @@ function hover(element) {
 function unhover(element) {
     element.setAttribute('src', 'styles/images/twitter.png');
 }
+
+function hover_fb(element) {
+    element.setAttribute('src', 'styles/images/facebook_hover.png');
+}
+function unhover_fb(element) {
+    element.setAttribute('src', 'styles/images/facebook.png');
+}
+
+function hover_g(element) {
+    element.setAttribute('src', 'styles/images/googleplus_hover.png');
+}
+function unhover_g(element) {
+    element.setAttribute('src', 'styles/images/googleplus.png');
+}
+
