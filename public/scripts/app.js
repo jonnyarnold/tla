@@ -70,3 +70,10 @@ jQuery(document).ready(function() {
     });
 
 });
+
+function hover(element) {
+    element.setAttribute('src', 'styles/images/twitter_hover.png');
+}
+function unhover(element) {
+    element.setAttribute('src', 'styles/images/twitter.png');
+}
