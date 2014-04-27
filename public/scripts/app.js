@@ -74,6 +74,18 @@ function TlaViewModel() {
     }
 }
 
+function on_google_load() {
+    // Set up the G+ button with default values
+    gapi.interactivepost.render('googleplus', {
+        contenturl: window.location.origin,
+        prefilltext: "TLA! Three Letter Acronyms, just for you.",
+        clientid: "623511604369-ugqlkfccssq1pgdf9klld1rm53l6epvg.apps.googleusercontent.com",
+        cookiepolicy: window.location.origin,
+        calltoactionurl: window.location.origin,
+        
+    });
+}
+
 jQuery(document).ready(function() {
     ko.applyBindings(TlaViewModel());
 
@@ -86,7 +98,6 @@ jQuery(document).ready(function() {
         });
         input[0].selectionStart = input[0].selectionEnd = start;
     });
-
 });
 
 // switches the corresponding social media icon with its onHover countepart
