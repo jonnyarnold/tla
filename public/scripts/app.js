@@ -1,5 +1,6 @@
 function TlaViewModel() {
     var self = this;
+    self.siteDescription = "TLA! Three Letter Acronyms, just for you.";
 
     // Establish modeol properties
     self.acronym = ko.observable();
@@ -32,21 +33,38 @@ function TlaViewModel() {
         return self.capitalAcronym.peek() + ": " + self.suggestion();
     });
 
-    // Sets the twitter target url. If no suggestion exists,
-    // a default message is placed in instead.
+    // The text to be set as the default in social media postings.
+    self.socialMediaComment = ko.computed(function() {
+        if (self.suggestion()) {
+            return self.result();
+        } else {
+            return self.siteDescription;
+        }
+    });
+
     self.twitterUrl = ko.computed(function() {
         var url = window.location.origin;
 
-        if (self.suggestion()) {
-            var tweetText = self.result();
-        } else {
-            var tweetText = "TLA! Three Letter Acronyms, just for you.";
-        }
-        
         return "https://twitter.com/intent/tweet" +
             "?hashtags=" + "TLA" +
             "&url=" + encodeURIComponent(url) +
-            "&text=" + tweetText;
+            "&text=" + self.socialMediaComment();
+    });
+
+    self.facebookUrl = ko.computed(function() {
+        var url = window.location.origin;
+
+        // Note that Facebook doesn't play well with localhost
+        // when you're on development. To see what will actually
+        // be shown, copy the link URL and replace localhost:4567
+        // with the production URL.
+        return "https://www.facebook.com/dialog/feed?" +
+            "app_id=1416309778636759" +
+            "&display=page" +
+            "&description=" + self.siteDescription +
+            "&name=" + self.socialMediaComment() +
+            "&link=" + encodeURIComponent(url) + 
+            "&redirect_uri=" + encodeURIComponent(url)
     });
 
     self.onKeypress = function(data, event) {
