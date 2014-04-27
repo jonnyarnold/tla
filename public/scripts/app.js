@@ -70,3 +70,51 @@ jQuery(document).ready(function() {
     });
 
 });
+
+// switches the corresponding social media icon with its onHover countepart
+function hover(element) {
+
+    n=element.id;
+
+    switch(n){
+        case "twitter_icon":
+            element.setAttribute('src', 'styles/images/twitter_hover.png')
+            break;
+        case "facebook_icon":
+            element.setAttribute('src', 'styles/images/facebook_hover.png');
+            break;
+        case "googleplus_icon":
+            element.setAttribute('src', 'styles/images/googleplus_hover.png');
+            break;
+        case "linkedin_icon":
+            element.setAttribute('src', 'styles/images/linkedin_hover.png');
+            break;
+        default:
+            // do nothing
+            break;
+    }
+}
+
+// switches the corresponding social media icon back to the default image
+function unhover(element) {
+
+    n=element.id;
+
+    switch(n){
+        case "twitter_icon":
+            element.setAttribute('src', 'styles/images/twitter.png')
+            break;
+        case "facebook_icon":
+            element.setAttribute('src', 'styles/images/facebook.png');
+            break;
+        case "googleplus_icon":
+            element.setAttribute('src', 'styles/images/googleplus.png');
+            break;
+        case "linkedin_icon":
+            element.setAttribute('src', 'styles/images/linkedin.png');
+            break;
+        default:
+            // do nothing
+            break;
+    }
+}
