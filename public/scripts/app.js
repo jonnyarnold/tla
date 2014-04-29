@@ -76,6 +76,21 @@ function TlaViewModel() {
             "&summary=" + self.siteDescription;
     })
 
+    self.googleplusUrl = ko.computed(function() {
+        var url = encodeURIComponent(window.location.origin);
+
+        // So this isn't documented, but when you make an Interactive Post
+        // button the user is redirected to a URL such as this.
+        return "https://apis.google.com/_/sharebox/dialog?" + 
+            "editorText=" + self.socialMediaComment() +
+            "&inviteClientId=623511604369-ugqlkfccssq1pgdf9klld1rm53l6epvg.apps.googleusercontent.com" +
+            "&callToActionUrl=" + url +
+            "&isInteractivePost=true" + 
+            "&claimedOrigin=" + url  +
+            "&url=" + url +
+            "&prm=url&sts=hulnztbt&susp=true&wpp=1&gpsrc=gplp0"
+    })
+
     self.onKeypress = function(data, event) {
         // Force re-evaluation on 'enter'
         if (event.keyCode == 13) self.acronym.valueHasMutated();
@@ -89,9 +104,8 @@ function on_google_load() {
         contenturl: window.location.origin,
         prefilltext: "TLA! Three Letter Acronyms, just for you.",
         clientid: "623511604369-ugqlkfccssq1pgdf9klld1rm53l6epvg.apps.googleusercontent.com",
-        cookiepolicy: window.location.origin,
-        calltoactionurl: window.location.origin,
-        
+        cookiepolicy: 'single_host_origin',
+        calltoactionurl: window.location.origin
     });
 }
 
