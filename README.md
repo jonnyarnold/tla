@@ -27,3 +27,4 @@ Words come from Linux's words file, ```/usr/share/dict/words```, using the follo
 * Adjectives: ```^[a-z](.*)(ous|al|ive|ible|able|ful)$```
 * Agent nouns: ```^[a-z](.*)(or|er|ist)$```
 * Nouns: ```^[a-z](.*)(ness|ity|ance|ence|tion|sion|ment|ship|hood)$```
+They have sinced been hacked away to get rid of incorrectly classed words and 'unfunny' words.

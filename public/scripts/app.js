@@ -67,6 +67,15 @@ function TlaViewModel() {
             "&redirect_uri=" + encodeURIComponent(url)
     });
 
+    self.linkedinUrl = ko.computed(function() {
+        var url = encodeURIComponent(window.location.origin);
+
+        return "http://www.linkedin.com/shareArticle?mini=true" +
+            "&url=" + url +
+            "&title=" + self.socialMediaComment() +
+            "&summary=" + self.siteDescription;
+    })
+
     self.onKeypress = function(data, event) {
         // Force re-evaluation on 'enter'
         if (event.keyCode == 13) self.acronym.valueHasMutated();
