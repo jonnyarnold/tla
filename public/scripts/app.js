@@ -98,17 +98,6 @@ function TlaViewModel() {
     }
 }
 
-function on_google_load() {
-    // Set up the G+ button with default values
-    gapi.interactivepost.render('googleplus', {
-        contenturl: window.location.origin,
-        prefilltext: "TLA! Three Letter Acronyms, just for you.",
-        clientid: "623511604369-ugqlkfccssq1pgdf9klld1rm53l6epvg.apps.googleusercontent.com",
-        cookiepolicy: 'single_host_origin',
-        calltoactionurl: window.location.origin
-    });
-}
-
 jQuery(document).ready(function() {
     ko.applyBindings(TlaViewModel());
 
