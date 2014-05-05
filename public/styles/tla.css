@@ -129,6 +129,10 @@ html,body {
     display:inline-block;
 }
 
+.voting-group {
+    text-align: center;
+}
+
 @media(max-width:460px){
     .interaction .interaction-box{
         margin:0 10px;
