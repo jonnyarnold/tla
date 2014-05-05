@@ -14,9 +14,9 @@ class AcronymSuggester
   ]
 
   # Initialize the suggester
-  # Takes a list of Words
-  def initialize(word_list)
-    @words = word_list
+  # Takes a +WordStore+.
+  def initialize(word_store)
+    @words = word_store
   end
 
   # Suggest a definition of the given acronym.
@@ -29,7 +29,7 @@ class AcronymSuggester
     suggestion = (0...(acronym.length)).map do |index|
       letter = acronym[index]
       type = structure[index]
-      suggest_word(letter, type)
+      @words.get_word(letter, type)
     end
       
     suggestion.join(' ')
@@ -40,15 +40,6 @@ class AcronymSuggester
   # Gets structures that could match the given acronym.
   def valid_structures_for(acronym)
     AllowedStructures.select { |s| acronym.length == s.length }
-  end
-
-  # Gets a word from the word list
-  # starting with the given letter
-  # and of the given word type.
-  def suggest_word(letter, type)
-    @words
-      .select { |word| word.start_with?(letter) and word.type == type }
-      .sample
   end
 
 end

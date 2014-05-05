@@ -1,10 +1,11 @@
 require 'sinatra'
 require './acronym'
 require './word'
+require './word_store'
 
 set :static_cache_control, [:public, max_age: 60 * 60 * 24]
 
-suggester = AcronymSuggester.new(Word.load_from_file('words.txt'))
+suggester = AcronymSuggester.new(FileWordStore.new('words.txt'))
 
 get '/' do
   content_type 'html'
