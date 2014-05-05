@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+        <title>TLA! Word Rankings</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link href="styles/bootstrap.min.css" type="text/css" rel="stylesheet">
+        <link href="styles/bootstrap-theme.min.css" type="text/css" rel="stylesheet">
+        <link href="styles/bootstrap.min.css" type="text/css" rel="stylesheet">
+        <link href="styles/tla.css" type="text/css" rel="stylesheet">
+    </head>
+    
+    <body>
+      <div class="container-full">
+        <div class="interaction col-lg-6">
+            <div class="well interaction-box">
+              <h1>Top</h1>
+              <ol>
+                <% @top.each do |word| %>
+                  <li><%= "#{word} (#{word.score} from #{word.votes} votes)" %></li>
+                <% end %>
+              </ol>
+              <h1>Bottom</h1>
+              <ol>
+                <% @bottom.each do |word| %>
+                  <li><%= "#{word} (#{word.score} from #{word.votes} votes)" %></li>
+                <% end %>
+              </ol>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+      </div>
+    </body>
+</html>

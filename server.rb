@@ -5,21 +5,28 @@ require './word_store'
 
 set :static_cache_control, [:public, max_age: 60 * 60 * 24]
 
-suggester = AcronymSuggester.new(MarshalWordStore.new('marshal_word_store'))
+words = MarshalWordStore.new('marshal_word_store')
+suggester = AcronymSuggester.new(words)
 
 get '/' do
   content_type 'html'
   erb :index
 end
 
+get "/ranking" do
+  @top = words.top
+  @bottom = words.bottom
+  erb :ranking
+end
+
 get %r{/([A-Za-z]{2,4})$} do |acronym|
   suggester.suggest_for(acronym.upcase)
 end
 
-get "/+1/:phrase" do
-  suggester.upvote(phrase)
+post "/+1/:phrase" do
+  suggester.upvote(params[:phrase])
 end
 
-get "/-1/:phrase" do
-  suggester.downvote(phrase)
+post "/-1/:phrase" do
+  suggester.downvote(params[:phrase])
 end

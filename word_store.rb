@@ -13,6 +13,8 @@ class WordStore
     else
       @words.push word
     end
+
+    on_change
   end
 
   # Gets a word.
@@ -28,6 +30,7 @@ class WordStore
     # Each word has a score between 0 and 1.
     # We use the score as a probability of
     # choosing the word.
+    word = nil
     loop do
       word = filtered_words.sample
       if word.score > @randomiser.rand
@@ -39,13 +42,37 @@ class WordStore
   end
 
   def upvote(word)
+    word = find_word(word) if word.instance_of? String
     word.upvote
+    on_change
   end
 
   def downvote(word)
+    word = find_word(word) if word.instance_of? String
     word.downvote
+    on_change
   end
 
+  def top(count=10)
+    @words
+      .sort_by { |word| -word.score }
+      .take(count)
+  end
+
+  def bottom(count=10)
+    @words
+      .sort_by { |word| word.score }
+      .take(count)
+  end
+
+  private
+
+  def find_word(string)
+    word = @words.find { |w| w == string }
+    raise StandardError.new("Could not find word #{string} in WordStore!") if word.nil?
+
+    word
+  end
 end
 
 # Uses a file for word storage.
@@ -53,6 +80,7 @@ class FileWordStore < WordStore
 
   # Creates a FileWordStore.
   def initialize(word_file)
+    super()
     @words = get_words_from_file(word_file)
   end
 
@@ -94,18 +122,13 @@ end
 class MarshalWordStore < WordStore
 
   def initialize(marshal_file)
+    super()
     @file_path = marshal_file
     File.write(@file_path, Marshal::dump([])) unless File.exists? @file_path
     @words = Marshal::load(File.read(marshal_file))
   end
 
-  # Add a word or list of words to the store.
-  def add(word)
-    super word
-    save!
-  end
-
-  def save!
+  def on_change
     File.write(@file_path, Marshal::dump(@words))
   end
 

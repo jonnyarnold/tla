@@ -27,6 +27,10 @@ class Word < String
     @scoring.downvote
   end
 
+  def votes
+    @scoring.votes
+  end 
+
 end
 
 # Container for all votes for a word
@@ -46,23 +50,28 @@ class WordScore
     @votes.push -1
   end
 
+  def votes
+    @votes.count
+  end
+
   # Returns the likelihood of the word being funny,
   # between 0 and 1
   def score
     # The sum will be between +count and -count.
     # The mean will be between 1 and -1.
-    mean = @votes.sum / @votes.count
+    mean = if @votes.empty? then 0.0 else @votes.reduce(0.0, :+).to_f / @votes.count end
 
     # If we normalised now then after 1 vote we'd
     # either have a 0 or 1 for the word. We scale
     # down the allowed range for low-vote words.
-    if @votes.count < VotesBeforeNoScaling
-      scale_factor = @votes.count / VotesBeforeNoScaling
+    if 0 < @votes.count and @votes.count < VotesBeforeNoScaling
+      scale_factor = @votes.count.to_f / VotesBeforeNoScaling
       mean *= scale_factor
     end
 
     # Normalise from +1/-1 to 0/1
-    score = (mean / 2) + 0.5
+    score = (mean / 2.0) + 0.5
+    score
   end
 
 end

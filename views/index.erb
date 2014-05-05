@@ -48,6 +48,11 @@
                   <div data-bind="text: result, visible: acronym() && suggestion()" class="tla-result-group">
                   </div>
 
+                  <div id="Voting" class="voting-group">
+                    <a id="up" href="javascript:upvote()"><img id="upvote_icon" src="styles/images/upvote.png" /></a>
+                    <a id="down" href="javascript:downvote()"><img id="downvote_icon" src="styles/images/downvote.png" /></a>
+                  </div>
+
                   <div id="SocialMedia" class="social-media-group">
                     <div id="twitter" class="social-media-item" >
                       <a id="tweet" data-bind="attr: { 'href': twitterUrl }" target="_blank"><img id="twitter_icon" src="styles/images/twitter.png" onmouseover="hover(this);" onmouseout="unhover(this);"></a>

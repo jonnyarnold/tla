@@ -96,6 +96,14 @@ function TlaViewModel() {
         if (event.keyCode == 13) self.acronym.valueHasMutated();
         return true;
     }
+
+    self.upvote = function() {
+        $.post("/+1/" + encodeURIComponent(self.suggestion()))
+    }
+
+    self.downvote = function() {
+        $.post("/-1/" + encodeURIComponent(self.suggestion()))
+    }
 }
 
 jQuery(document).ready(function() {

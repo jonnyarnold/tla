@@ -37,12 +37,12 @@ class AcronymSuggester
 
   def upvote(phrase)
     words = phrase.split(' ')
-    words.each { |w| @words.upvote(w) }
+    words.each { |w| puts "Upvoting #{w}"; @words.upvote(w) }
   end
 
   def downvote(phrase)
     words = phrase.split(' ')
-    words.each { |w| @words.downvote(w) }
+    words.each { |w| puts "Downvoting #{w}"; @words.downvote(w) }
   end
 
   private
