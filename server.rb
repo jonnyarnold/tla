@@ -15,3 +15,11 @@ end
 get %r{/([A-Za-z]{2,4})$} do |acronym|
   suggester.suggest_for(acronym.upcase)
 end
+
+get "/+1/:phrase" do
+  suggester.upvote(phrase)
+end
+
+get "/-1/:phrase" do
+  suggester.downvote(phrase)
+end

@@ -35,6 +35,16 @@ class AcronymSuggester
     suggestion.join(' ')
   end
 
+  def upvote(phrase)
+    words = phrase.split(' ')
+    words.each { |w| @words.upvote(w) }
+  end
+
+  def downvote(phrase)
+    words = phrase.split(' ')
+    words.each { |w| @words.downvote(w) }
+  end
+
   private
 
   # Gets structures that could match the given acronym.
