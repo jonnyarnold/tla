@@ -19,6 +19,14 @@ class Word < String
     @scoring.score
   end
 
+  def upvote
+    @scoring.upvote
+  end
+
+  def downvote
+    @scoring.downvote
+  end
+
 end
 
 # Container for all votes for a word

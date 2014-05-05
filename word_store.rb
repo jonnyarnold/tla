@@ -3,6 +3,7 @@ class WordStore
 
   def initialize
     @words = []
+    @randomiser = Random.new
   end
 
   # Adds the given word to the store.
@@ -21,7 +22,28 @@ class WordStore
     filtered_words = @words
     filtered_words = filtered_words.select { |w| w.start_with? starting_letter } unless starting_letter.nil?
     filtered_words = filtered_words.select { |w| w.type == word_type } unless word_type.nil?
-    filtered_words.sample
+
+    raise StandardError.new("No words for: starting_letter #{starting_letter}, word_type #{word_type}.") if filtered_words.empty?
+
+    # Each word has a score between 0 and 1.
+    # We use the score as a probability of
+    # choosing the word.
+    loop do
+      word = filtered_words.sample
+      if word.score > @randomiser.rand
+        break
+      end
+    end
+
+    word
+  end
+
+  def upvote(word)
+    word.upvote
+  end
+
+  def downvote(word)
+    word.downvote
   end
 
 end
