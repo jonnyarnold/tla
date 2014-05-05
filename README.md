@@ -18,7 +18,7 @@ Developers
 * Pull the repository
 * Use ```gem install bundle``` to install bundle, dependency management tool. 
 * Use ```bundle install``` to install the required packages
-* Run ```ruby server.rb``` to start the development instance
+* Run ```bundle exec rake init``` to start the development instance
 
 The Words
 ---------

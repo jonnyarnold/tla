@@ -1,3 +1,7 @@
+task :init => [:resetdb, :run] do |port|
+
+end
+
 task :resetdb do
   require './word'
   require './word_store'
@@ -8,4 +12,9 @@ task :resetdb do
   words = FileWordStore.get_words_from_file("words.txt")
   mws = MarshalWordStore.new(marshal_file)
   mws.add words
+end
+
+task :run do
+  port = ENV['port'] || 4567
+  `ruby server.rb -p #{port}`
 end

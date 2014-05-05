@@ -4,6 +4,7 @@ GEM
     rack (1.5.2)
     rack-protection (1.5.3)
       rack
+    rake (10.1.1)
     sinatra (1.4.5)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -11,8 +12,8 @@ GEM
     tilt (1.4.1)
 
 PLATFORMS
-  x64-mingw32
-  x86-mingw32
+  ruby
 
 DEPENDENCIES
+  rake
   sinatra
