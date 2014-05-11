@@ -24,7 +24,7 @@ module Configuration
     when :dev
       PostgresWordStore.new(dbname: 'tla')
     when :heroku
-      PostgresWordStore.new(ENV['DATABASE_URL'])
+      PostgresWordStore.new(explode_postgres_url(ENV['DATABASE_URL']))
     end
   end
 
@@ -32,6 +32,20 @@ module Configuration
   # to populate a database with.
   def self.initial_words_path
     "words.txt"
+  end
+
+  private
+
+  def self.explode_postgres_url(url)
+    url_decoder = %r{^postgres://(?<dbname>[^:]*):(?<pass>[^@]*)@(?<host>[^:]*):(?<port>[^/]*)/(?<user>.*)$}
+    matches = url.match(url_decoder)
+    {
+      dbname: matches['dbname'],
+      host: matches['host'],
+      port: matches['port'],
+      user: matches['user'],
+      password: matches['pass']
+    }
   end
 
 end
