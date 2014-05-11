@@ -1,13 +1,12 @@
 require './config'
 
 # Resets the database
-def seed
-  require './word_store'
-  
+def seed  
   store = Configuration.word_store
   store.reset!
 
-  words = FileWordStore.get_words_from_file(Configuration::InitWordsPath)
+  require './word_stores/file_word_store'
+  words = FileWordStore.get_words_from_file(Configuration.initial_words_path)
   store.add words
 end
 
