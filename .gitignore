@@ -36,3 +36,4 @@ build/
 
 # Word store
 marshal_word_store
+pg_password

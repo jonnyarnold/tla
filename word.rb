@@ -12,7 +12,14 @@ class Word < String
 
     raise ArgumentError.new("Type #{type} is not in Word.Types") unless Types.include? type
     @type = type
-    @scoring = if scoring.nil? then WordScore.new else scoring end
+
+    if scoring.nil?
+      @scoring = WordScore.new
+    elsif scoring.is_a? WordScore
+      @scoring = scoring
+    else
+      raise StandardError.new("Invalid scoring argument: #{scoring}")
+    end
   end
 
   def score
@@ -31,6 +38,10 @@ class Word < String
     @scoring.votes
   end 
 
+  def vote_str
+    @scoring.to_s
+  end
+
 end
 
 # Container for all votes for a word
@@ -39,6 +50,7 @@ class WordScore
   VotesBeforeNoScaling = 10
 
   def initialize(votes=[])
+    raise ArgumentError, "Votes is not iterable: #{votes}" unless votes.respond_to? :each
     @votes = votes
   end
 
@@ -72,6 +84,27 @@ class WordScore
     # Normalise from +1/-1 to 0/1
     score = (mean / 2.0) + 0.5
     score
+  end
+
+  def to_s
+    @votes
+      .map{ |v| if v > 0 then "+" else "-" end }
+      .join
+  end
+
+  def self.from_s(str)
+    votes = []
+    str.each_char do |c|
+      if c == '+'
+        votes.push 1
+      elsif c == '-'
+        votes.push -1
+      else
+        raise StandardError.new("Invalid character #{c} in voting string #{str}")
+      end
+    end
+
+    self.new(votes)
   end
 
 end

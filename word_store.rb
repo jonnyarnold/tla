@@ -1,3 +1,5 @@
+require 'pg'
+
 # Stores +Word+s.
 class WordStore
 
@@ -26,19 +28,7 @@ class WordStore
     filtered_words = filtered_words.select { |w| w.type == word_type } unless word_type.nil?
 
     raise StandardError.new("No words for: starting_letter #{starting_letter}, word_type #{word_type}.") if filtered_words.empty?
-
-    # Each word has a score between 0 and 1.
-    # We use the score as a probability of
-    # choosing the word.
-    word = nil
-    loop do
-      word = filtered_words.sample
-      if word.score > @randomiser.rand
-        break
-      end
-    end
-
-    word
+    pick_word(filtered_words)
   end
 
   def upvote(word)
@@ -65,11 +55,27 @@ class WordStore
       .take(count)
   end
 
-  private
+  protected
 
   def find_word(string)
     word = @words.find { |w| w == string }
     raise StandardError.new("Could not find word #{string} in WordStore!") if word.nil?
+
+    word
+  end
+
+  # Picks a word, based on its score
+  def pick_word(words)
+    # Each word has a score between 0 and 1.
+    # We use the score as a probability of
+    # choosing the word.
+    word = nil
+    loop do
+      word = words.sample
+      if word.score > @randomiser.rand
+        break
+      end
+    end
 
     word
   end
@@ -118,18 +124,107 @@ class FileWordStore < WordStore
 
 end
 
-# Uses Marshal for storing words
-class MarshalWordStore < WordStore
+# Uses PostgreSQL for storing words
+class PostgresWordStore < WordStore
 
-  def initialize(marshal_file)
+  def initialize(connection)
     super()
-    @file_path = marshal_file
-    File.write(@file_path, Marshal::dump([])) unless File.exists? @file_path
-    @words = Marshal::load(File.read(marshal_file))
+    @connection_settings = connection
   end
 
-  def on_change
-    File.write(@file_path, Marshal::dump(@words))
+  def reset!
+    ensure_connected
+
+    @db.exec("DROP TABLE IF EXISTS words")
+    @db.exec("CREATE TABLE IF NOT EXISTS words ( word varchar(50), type varchar(20), votes text )")
+  end
+
+  # Adds the given word to the store.
+  def add(word)
+
+    ensure_connected
+    query = "INSERT INTO words (word, type, votes) VALUES "
+
+    values = []
+    if word.respond_to? :each
+      word.each { |w| values.push "('#{quoted(w.to_s)}', '#{w.type}', '#{w.vote_str}')" }
+    else
+      values.push "('#{quoted(word.to_s)}', '#{word.type}', '#{word.vote_str}')"
+    end
+
+    query += values.join(", ")
+    @db.exec(query)
+  end
+
+  # Gets a word.
+  # Note that this is a default implementation
+  # based on @words being in existence.
+  def get_word(starting_letter=nil, word_type=nil)
+    ensure_connected
+
+    filtered_words_query = "SELECT * FROM words"
+    conditions = []
+    conditions.push "word LIKE '#{starting_letter}%'" unless starting_letter.nil?
+    conditions.push "type = '#{word_type}'" unless word_type.nil?
+    unless conditions.empty?
+      filtered_words_query += " WHERE "
+      filtered_words_query += conditions.join(" AND ")
+    end
+
+    words = []
+    @db.exec(filtered_words_query) do |result|
+      result.each { |row| words << row_to_word(row) }
+    end
+
+    pick_word(words)
+  end
+
+  def upvote(word)
+    word = find_word(word) if word.instance_of? String
+    word.upvote
+    update(word)
+  end
+
+  def downvote(word)
+    word = find_word(word) if word.instance_of? String
+    word.downvote
+    update(word)
+  end
+
+  private
+
+  def ensure_connected
+    @db = PG.connect(@connection_settings) if @db.nil?
+  end
+
+  def quoted(word)
+    word.gsub("'", "\\'")
+  end
+
+  def row_to_word(row)
+    score = if row['votes'].empty? then nil else WordScore.from_s(row['votes']) end
+    word = Word.new(row['word'], row['type'].to_sym, score)
+    word
+  end
+
+  def find_word(string)
+    ensure_connected
+
+    query = "SELECT * FROM words WHERE word = '#{quoted(string)}' LIMIT 1"
+    
+    word = ""
+    @db.exec(query) do |result|
+      raise StandardError.new("Could not find word #{string} in WordStore!") if result.count == 0
+      word = row_to_word(result[0])
+    end
+
+    word
+  end
+
+  def update(word)
+    ensure_connected
+    query = "UPDATE words SET type = '#{word.type}', votes = '#{word.vote_str}' WHERE word = '#{quoted(word.to_s)}'"
+    @db.exec(query)
   end
 
 end

@@ -6,7 +6,7 @@ require './word_store'
 
 set :static_cache_control, [:public, max_age: 60 * 60 * 24]
 
-words = MarshalWordStore.new(Configuration::WordStorePath)
+words = Configuration.word_store
 suggester = AcronymSuggester.new(words)
 
 get '/' do

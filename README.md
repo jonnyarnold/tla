@@ -29,3 +29,5 @@ Words come from Linux's words file, ```/usr/share/dict/words```, using the follo
 * Nouns: ```^[a-z](.*)(ness|ity|ance|ence|tion|sion|ment|ship|hood)$```
 
 They have sinced been hacked away to get rid of incorrectly classed words and 'unfunny' words.
+
+Words are stored in a PostgreSQL repository, because it's free on Heroku. Installation is easy on Linux; Windows is untested. On development you will need to create a database called tla.
