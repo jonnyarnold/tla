@@ -37,7 +37,7 @@ module Configuration
   private
 
   def self.explode_postgres_url(url)
-    url_decoder = %r{^postgres://(?<dbname>[^:]*):(?<pass>[^@]*)@(?<host>[^:]*):(?<port>[^/]*)/(?<user>.*)$}
+    url_decoder = %r{^postgres://(?<user>[^:]*):(?<pass>[^@]*)@(?<host>[^:]*):(?<port>[^/]*)/(?<dbname>.*)$}
     matches = url.match(url_decoder)
     {
       dbname: matches['dbname'],
