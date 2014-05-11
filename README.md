@@ -14,11 +14,12 @@ Supports 2, 3 and 4 letters. Sense guaranteed.
 
 Developers
 ----------
-* Go and get Ruby (2.0.0 and above)
+* Go and get Ruby (2.0.0 and above) and PostgreSQL (8.4 and above)
 * Pull the repository
 * Use ```gem install bundle``` to install bundle, dependency management tool. 
 * Use ```bundle install``` to install the required packages
-* Run ```bundle exec rake init``` to start the development instance
+* Create the database 'tla' on PostgreSQL (on Linux, this is the ```createdb``` command.)
+* Run ```bundle exec rake run``` to start the development instance
 
 The Words
 ---------
@@ -30,7 +31,7 @@ Words come from Linux's words file, ```/usr/share/dict/words```, using the follo
 
 They have sinced been hacked away to get rid of incorrectly classed words and 'unfunny' words.
 
-Words are stored in a PostgreSQL repository, because it's free on Heroku. Installation is easy on Linux; Windows is untested. On development you will need to create a database called tla.
+Words are stored in a PostgreSQL repository, because it's free on Heroku. Installation is easy on Linux; Windows is untested.
 
 Scoring
 -------
