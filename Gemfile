@@ -4,4 +4,3 @@ ruby "2.0.0"
 gem 'sinatra'
 gem 'pg'
 gem 'rake'
-gem 'debugger'
