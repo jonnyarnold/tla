@@ -1,1 +1,1 @@
-web: bundle exec rake init port=$PORT
+web: bundle exec rake run port=$PORT

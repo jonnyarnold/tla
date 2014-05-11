@@ -1,11 +1,12 @@
 require 'sinatra'
+require './config'
 require './acronym'
 require './word'
 require './word_store'
 
 set :static_cache_control, [:public, max_age: 60 * 60 * 24]
 
-words = MarshalWordStore.new('marshal_word_store')
+words = MarshalWordStore.new(Configuration::WordStorePath)
 suggester = AcronymSuggester.new(words)
 
 get '/' do
