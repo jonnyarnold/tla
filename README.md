@@ -31,3 +31,11 @@ Words come from Linux's words file, ```/usr/share/dict/words```, using the follo
 They have sinced been hacked away to get rid of incorrectly classed words and 'unfunny' words.
 
 Words are stored in a PostgreSQL repository, because it's free on Heroku. Installation is easy on Linux; Windows is untested. On development you will need to create a database called tla.
+
+Scoring
+-------
+
+Word scoring is done as follows:
+* Individual words have their votes recorded (if the word 'interplay' is considered important, this may need to change)
+* A word can get +1 or -1 per vote.
+* Scoring is calculated in word.rb, in WordScore.score
