@@ -14,7 +14,7 @@ function TlaViewModel() {
     // 2 characters long.
     self.acronym.subscribe(function(input) {
         if (input.length > 1) {
-            $.get("/" + self.acronym(), self.suggestion); 
+            self.getSuggestion();
         } else {
             self.suggestion("");
         }
@@ -91,10 +91,16 @@ function TlaViewModel() {
             "&prm=url&sts=hulnztbt&susp=true&wpp=1&gpsrc=gplp0"
     })
 
-    self.onKeypress = function(data, event) {
-        // Force re-evaluation on 'enter'
-        if (event.keyCode == 13) self.acronym.valueHasMutated();
-        return true;
+    self.getSuggestion = function() {
+        $.get("/" + self.acronym(), self.suggestion); 
+    }
+
+    self.upvote = function() {
+        $.post("/+1/" + encodeURIComponent(self.suggestion()), "", self.getSuggestion)
+    }
+
+    self.downvote = function() {
+        $.post("/-1/" + encodeURIComponent(self.suggestion()), "", self.getSuggestion)
     }
 }
 

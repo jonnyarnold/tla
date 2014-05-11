@@ -31,7 +31,7 @@
 
                   <!-- User Input-->
                   <div class="form-group">
-                    <input data-bind="value: acronym, valueUpdate: 'afterkeydown', event: { keypress: onKeypress }"
+                    <input data-bind="value: acronym, valueUpdate: 'afterkeydown'"
                      placeholder="Enter TLA..."
                      onfocus="placeholder = '';" 
                      onblur="placeholder = 'Enter TLA...';" 
@@ -40,8 +40,13 @@
                      type="text">
                   </div>
 
-                  <div data-bind="visible: suggestion()" class="tla-hint">
-                    Press Enter for another suggestion
+                  <div data-bind="visible: acronym() && suggestion()" class="tla-hint">
+                    Tap a voting button to get another suggestion
+                  </div>
+
+                  <div id="Voting" data-bind="visible: acronym() && suggestion()" class="voting-group">
+                    <a id="up" href="javascript:upvote()"><img id="upvote_icon" src="styles/images/upvote.png" /></a>
+                    <a id=" down" href="javascript:downvote()"><img id="downvote_icon" src="styles/images/downvote.png" /></a>
                   </div>
 
                   <!-- Result Output -->
